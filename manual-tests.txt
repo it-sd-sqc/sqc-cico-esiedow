@@ -70,3 +70,14 @@ Use `./build.sh` to build CiCo and `./run.sh` to run it if using the command lin
 
 ## Expected results
 * Should only display 12345678 in the field
+
+# Module 5: Exit button to main page
+
+## Test steps
+1. Build and run CiCo
+2. enter 00000000 into the field.
+3. click Update
+4. click Exit
+
+## Expected results
+* Should change to the main panel right after clicking exit
