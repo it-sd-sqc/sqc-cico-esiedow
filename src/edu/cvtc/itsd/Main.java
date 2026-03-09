@@ -32,6 +32,14 @@ public class Main {
   private static final long TIMEOUT_PANEL_MS = 10 * 1000;
   private static final int TIMEOUT_STATEMENT_S = 5;
 
+  // Visual design constants.
+  private static final Color COLOR_BACKGROUND = new Color(32, 32, 32);
+  private static final Color COLOR_PANEL = new Color(45, 45, 45);
+  private static final Color COLOR_SURFACE = new Color(58, 58, 58);
+  private static final Color COLOR_TEXT_PRIMARY = new Color(236, 236, 236);
+  private static final Color COLOR_TEXT_SECONDARY = new Color(190, 190, 190);
+  private static final Color COLOR_BORDER = new Color(96, 96, 96);
+
   // Internal classes ///////////////////////////////////////////////////////////
   // InputFilter manages user input to the card number field.
   private static class InputFilter extends DocumentFilter {
@@ -241,13 +249,13 @@ public class Main {
     panelMain.setMinimumSize(new Dimension(320, 240));
     panelMain.setPreferredSize(new Dimension(640, 480));
     panelMain.setMaximumSize(new Dimension(640, 480));
-    panelMain.setBackground(Color.black);
+    panelMain.setBackground(COLOR_BACKGROUND);
 
     panelMain.add(Box.createVerticalGlue());
     JLabel labelDirective = new JLabel("Scan card", JLabel.LEADING);
     labelDirective.setFont(fontMain);
     labelDirective.setAlignmentX(JComponent.CENTER_ALIGNMENT);
-    labelDirective.setForeground(Color.cyan);
+    labelDirective.setForeground(COLOR_TEXT_PRIMARY);
     panelMain.add(labelDirective);
 
     fieldNumber = new JTextField();
@@ -256,14 +264,18 @@ public class Main {
     fieldNumber.setPreferredSize(new Dimension(200, 32));
     fieldNumber.setMaximumSize(new Dimension(200, 32));
     fieldNumber.setAlignmentX(JComponent.CENTER_ALIGNMENT);
-    fieldNumber.setBackground(Color.green);
-    fieldNumber.setForeground(Color.magenta);
+    fieldNumber.setBackground(COLOR_SURFACE);
+    fieldNumber.setForeground(COLOR_TEXT_PRIMARY);
+    fieldNumber.setCaretColor(COLOR_TEXT_PRIMARY);
+    fieldNumber.setBorder(BorderFactory.createLineBorder(COLOR_BORDER));
     panelMain.add(fieldNumber);
 
     JButton updateButton = new JButton("Update");
     updateButton.setAlignmentX(JComponent.CENTER_ALIGNMENT);
     updateButton.addActionListener(new Update());
-    updateButton.setForeground(Color.green);
+    updateButton.setBackground(COLOR_SURFACE);
+    updateButton.setForeground(COLOR_TEXT_PRIMARY);
+    updateButton.setBorder(BorderFactory.createLineBorder(COLOR_BORDER));
     panelMain.add(updateButton);
 
     panelMain.add(Box.createVerticalGlue());
@@ -274,19 +286,19 @@ public class Main {
     panelStatus.setMinimumSize(new Dimension(320, 240));
     panelStatus.setPreferredSize(new Dimension(640, 480));
     panelStatus.setMaximumSize(new Dimension(640, 480));
-    panelStatus.setBackground(Color.blue);
+    panelStatus.setBackground(COLOR_PANEL);
 
     panelStatus.add(Box.createVerticalGlue());
     labelUser = new JLabel("Registrant", JLabel.LEADING);
     labelUser.setFont(fontMain);
     labelUser.setAlignmentX(JComponent.CENTER_ALIGNMENT);
-    labelUser.setForeground(Color.yellow);
+    labelUser.setForeground(COLOR_TEXT_PRIMARY);
     panelStatus.add(labelUser);
 
     labelState = new JLabel("updated", JLabel.LEADING);
     labelState.setFont(fontMain);
     labelState.setAlignmentX(JComponent.CENTER_ALIGNMENT);
-    labelState.setForeground(Color.magenta);
+    labelState.setForeground(COLOR_TEXT_SECONDARY);
     panelStatus.add(labelState);
 
     panelStatus.add(Box.createVerticalGlue());
@@ -297,19 +309,21 @@ public class Main {
     panelError.setMinimumSize(new Dimension(320, 240));
     panelError.setPreferredSize(new Dimension(640, 480));
     panelError.setMaximumSize(new Dimension(640, 480));
-    panelError.setBackground(Color.red);
+    panelError.setBackground(COLOR_PANEL);
 
     panelError.add(Box.createVerticalGlue());
     labelReason = new JLabel("", JLabel.LEADING);
     labelReason.setFont(fontMain);
     labelReason.setAlignmentX(JComponent.CENTER_ALIGNMENT);
-    labelReason.setForeground(Color.yellow);
+    labelReason.setForeground(COLOR_TEXT_PRIMARY);
     panelError.add(labelReason);
 
     buttonAcknowledge = new JButton("OK");
     buttonAcknowledge.addActionListener(handler);
     buttonAcknowledge.setAlignmentX(JComponent.CENTER_ALIGNMENT);
-    buttonAcknowledge.setForeground(Color.red);
+    buttonAcknowledge.setBackground(COLOR_SURFACE);
+    buttonAcknowledge.setForeground(COLOR_TEXT_PRIMARY);
+    buttonAcknowledge.setBorder(BorderFactory.createLineBorder(COLOR_BORDER));
     panelError.add(buttonAcknowledge);
     panelError.add(Box.createVerticalGlue());
 
@@ -322,8 +336,8 @@ public class Main {
     // Module 2 ticket: Add version number.
     JLabel labelMeta = new JLabel("CiCo v" + VERSION);
     labelMeta.setOpaque(true);
-    labelMeta.setBackground(Color.darkGray);
-    labelMeta.setForeground(Color.white);
+    labelMeta.setBackground(COLOR_BACKGROUND);
+    labelMeta.setForeground(COLOR_TEXT_SECONDARY);
     labelMeta.setBorder(new EmptyBorder(10, 10, 10, 10));
     labelMeta.setMinimumSize(new Dimension(320, 32));
     labelMeta.setPreferredSize(new Dimension(640, 32));
