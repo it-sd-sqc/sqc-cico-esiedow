@@ -49,7 +49,7 @@ public class Main {
     public void insertString(FilterBypass fb, int offset, String stringToAdd, AttributeSet attr)
         throws BadLocationException
     {
-      if (fb.getDocument() != null) {
+      if (fb.getDocument() != null && fb.getDocument().getLength() < MAX_LENGTH) {
         super.insertString(fb, offset, stringToAdd, attr);
       }
       else {
@@ -61,7 +61,7 @@ public class Main {
     public void replace(FilterBypass fb, int offset, int lengthToDelete, String stringToAdd, AttributeSet attr)
         throws BadLocationException
     {
-      if (fb.getDocument() != null) {
+      if (fb.getDocument() != null && fb.getDocument().getLength() < MAX_LENGTH) {
         super.replace(fb, offset, lengthToDelete, stringToAdd, attr);
       }
       else {
@@ -79,9 +79,7 @@ public class Main {
 
   // Revert to the main panel after a button press ////////////////////////////
   public static class Handler implements ActionListener {
-    public void actionPerformed(ActionEvent evt) {
-      Main.doneProcessing();
-    }
+    public void actionPerformed(ActionEvent evt) {Main.doneProcessing();}
   }
 
   // Revert to the main panel after time has passed ///////////////////////////
@@ -211,7 +209,12 @@ public class Main {
   private static void doneProcessing() {
     timeout.cancel();
     timeout = null;
-    fieldNumber.setText("");
+    // how I had my input filter made me unable to reset the text for "fieldNumber" and played the
+    // error beep, so disabling the filter and applying it again after resting the text fixes this
+    ((AbstractDocument)(fieldNumber.getDocument())).setDocumentFilter(null);
+    fieldNumber.setText(null);
+    InputFilter filter = new InputFilter();
+    ((AbstractDocument)(fieldNumber.getDocument())).setDocumentFilter(filter);
     ((CardLayout)deck.getLayout()).show(deck, CARD_MAIN);
     fieldNumber.grabFocus();
   }
@@ -300,6 +303,12 @@ public class Main {
     labelState.setAlignmentX(JComponent.CENTER_ALIGNMENT);
     labelState.setForeground(COLOR_TEXT_SECONDARY);
     panelStatus.add(labelState);
+
+    JButton exitButton = new JButton("Exit");
+    exitButton.setAlignmentX(JComponent.CENTER_ALIGNMENT);
+    exitButton.addActionListener(new Handler());
+    exitButton.setForeground(Color.red);
+    panelStatus.add(exitButton);
 
     panelStatus.add(Box.createVerticalGlue());
 
