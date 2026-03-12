@@ -62,22 +62,16 @@ Use `./build.sh` to build CiCo and `./run.sh` to run it if using the command lin
 * Should display "Developer" for the user name.
 
 
-# Module 4: Limit number of imputs
+
+# Module 6: Professional monochromatic visual style
 
 ## Test steps
-1. Build and run CiCo
-2. Enter 1234567890 into the field.
+1. Build and run CiCo.
+2. Observe main, status, error, and footer panels.
+3. Enter 00000000 into the field and click Update.
+4. Enter 99999999 into the field and click Update.
 
 ## Expected results
-* Should only display 12345678 in the field
-
-# Module 5: Exit button to main page
-
-## Test steps
-1. Build and run CiCo
-2. enter 00000000 into the field.
-3. click Update
-4. click Exit
-
-## Expected results
-* Should change to the main panel right after clicking exit
+* The interface should use neutral monochromatic colors (grays, black, white) instead of bright, clashing colors.
+* Text should remain easy to read on each panel.
+* Status and error screens should keep the same subdued neutral styling as the main panel.
